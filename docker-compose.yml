@@ -5,7 +5,7 @@ services:
     working_dir: /app
     volumes:
       - ./be:/app
-    env_file: 
+    env_file:
       - env/common.env
     expose:
       - 3000
@@ -19,7 +19,7 @@ services:
     working_dir: /app
     volumes:
       - ./fe:/app
-    env_file: 
+    env_file:
       - env/common.env
     expose:
       - 3000
@@ -29,7 +29,7 @@ services:
     networks:
       - backend
   mongodb:
-    image: mongo:latest
+    image: mongo:4
     networks:
       - backend
 

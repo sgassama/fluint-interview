@@ -1,18 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Data } from 'src/data.db';
 import { DataDao } from './data.dao';
 
 @Injectable()
 export class AppService {
+  constructor(private readonly dataDao: DataDao) {}
 
-  constructor(
-    private readonly dataDao: DataDao
-  ){}
+  async getAll(): Promise<Data[]> {
+    return this.dataDao.getAll();
+  }
 
+  async create(content: string): Promise<Data> {
+    return this.dataDao.create({ data: content });
+  }
 
-  async getAll() {
-    return [{data: '123'}]
+  async update(id: string, content: Data): Promise<Data> {
+    return this.dataDao.update(id, content);
+  }
 
-    //return await this.dataDao.getAll()
+  async delete(id: string): Promise<void> {
+    await this.dataDao.delete(id);
   }
 }
